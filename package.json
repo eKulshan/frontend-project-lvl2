@@ -24,10 +24,12 @@
   },
   "homepage": "https://github.com/eKulshan/frontend-project-lvl2#readme",
   "dependencies": {
-    "commander": "^5.1.0"
+    "commander": "^5.1.0",
+    "fs": "0.0.1-security",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "eslint": "^7.0.0",
+    "eslint": "7.2.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2"
   }
