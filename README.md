@@ -4,6 +4,7 @@
 
 # GenDiff - Hexlet second frontend project
 **gendiff** is a cli utility that compares two files and shows difference between them.
+
 May be used as cli utility or as module.
 
 ## Setup & run
