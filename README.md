@@ -13,4 +13,5 @@ make install \\ install depencies
 npm link \\ run command in project directory to install gendiff as cli utility
 gendiff -h \\ type in command line for help info about usage of gendiff
 ```
-[![asciicast](https://asciinema.org/a/SZGxlTECnEcbIFWYJlyNT8pxP.svg)](https://asciinema.org/a/SZGxlTECnEcbIFWYJlyNT8pxP)
+[gendiff JSON![asciicast](https://asciinema.org/a/SZGxlTECnEcbIFWYJlyNT8pxP.svg)](https://asciinema.org/a/SZGxlTECnEcbIFWYJlyNT8pxP)
+[gendiff YAML![asciicast](https://asciinema.org/a/xJLJYEWKa9OCU1tbtLLaCqnVU.svg)](https://asciinema.org/a/xJLJYEWKa9OCU1tbtLLaCqnVU)

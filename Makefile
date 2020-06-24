@@ -12,3 +12,10 @@ gendiffJSON:
 	node bin/gendiff.js ./__fixtures__/before.json ./__fixtures__/after.json
 gendiffYAML:
 	node bin/gendiff.js ./__fixtures__/before.yml ./__fixtures__/after.yml
+asciinem:
+	cat ./__fixtures__/before.yml
+	sleep 3s
+	cat ./__fixtures__/after.yml
+	sleep 3s
+	node bin/gendiff.js ./__fixtures__/before.yml ./__fixtures__/after.yml
+	sleep 3s
