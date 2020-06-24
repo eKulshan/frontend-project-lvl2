@@ -1,11 +1,5 @@
-import fs from 'fs';
 import _ from 'lodash';
-import path from 'path';
-
-const parseFile = (filepath) => {
-  const fullPathToFile = (filepath.startsWith('/')) ? filepath : path.resolve(process.cwd(), filepath);
-  return JSON.parse(fs.readFileSync(fullPathToFile, 'utf-8'));
-};
+import parseFile from './parsers.js';
 
 const genDiff = (firstFilePath, secondFilePath) => {
   const firstFileData = parseFile(String(firstFilePath));

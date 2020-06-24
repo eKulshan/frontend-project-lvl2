@@ -10,6 +10,10 @@ const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8'
 
 const expectedOupput = readFile('result.txt');
 
-test('gendiff output match', () => {
+test('gendiff JSON output match', () => {
   expect(genDiff(getFixturePath('before.json'), getFixturePath('after.json'))).toEqual(expectedOupput);
 });
+test('gendiff YAML output match', () => {
+  expect(genDiff(getFixturePath('before.yml'), getFixturePath('after.yml'))).toEqual(expectedOupput);
+});
+

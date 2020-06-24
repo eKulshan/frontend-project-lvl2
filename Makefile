@@ -8,5 +8,7 @@ test-coverage:
 	npm test -- --coverage --coverageProvider=v8
 lint:
 	npx eslint .
-gendiff:
+gendiffJSON:
 	node bin/gendiff.js ./__fixtures__/before.json ./__fixtures__/after.json
+gendiffYAML:
+	node bin/gendiff.js ./__fixtures__/before.yml ./__fixtures__/after.yml
