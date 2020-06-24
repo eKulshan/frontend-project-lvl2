@@ -3,15 +3,10 @@ install:
 publish:
 	npm publish --dry-run
 test:
-	gendiff ./files/before.json ~/work/hexlet/frontend-project-lvl2/files/after.json
+	npm test
+test-coverage:
+	npm test -- --coverage --coverageProvider=v8
 lint:
 	npx eslint .
 gendiff:
-	node bin/gendiff.js
-asciinema:
-	cat ./files/before.json
-	sleep 3s
-	cat ./files/after.json
-	sleep 3s
-	gendiff ./files/before.json ./files/after.json
-	sleep 3s
+	node bin/gendiff.js ./__fixtures__/before.json ./__fixtures__/after.json
