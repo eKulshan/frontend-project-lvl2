@@ -1,5 +1,5 @@
 import fs from 'fs';
-import genDiff from '../src/gendiff.js';
+import genDiff from '../index.js';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 
@@ -10,10 +10,12 @@ const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8'
 
 const expectedOupput = readFile('result.txt');
 
-test('gendiff JSON output match', () => {
-  expect(genDiff(getFixturePath('before.json'), getFixturePath('after.json'))).toEqual(expectedOupput);
+test.each([
+  ['json'],
+  ['yml'],
+  ['ini'],
+])('gendiff %s output match', (extension) => {
+  expect(genDiff(getFixturePath(`before.${extension}`), getFixturePath(`after.${extension}`))).toEqual(expectedOupput);
 });
-test('gendiff YAML output match', () => {
-  expect(genDiff(getFixturePath('before.yml'), getFixturePath('after.yml'))).toEqual(expectedOupput);
-});
+
 

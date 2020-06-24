@@ -13,9 +13,9 @@ gendiffJSON:
 gendiffYAML:
 	node bin/gendiff.js ./__fixtures__/before.yml ./__fixtures__/after.yml
 asciinem:
-	cat ./__fixtures__/before.yml
+	cat ./__fixtures__/before.ini
 	sleep 3s
-	cat ./__fixtures__/after.yml
+	cat ./__fixtures__/after.ini
 	sleep 3s
-	node bin/gendiff.js ./__fixtures__/before.yml ./__fixtures__/after.yml
+	node bin/gendiff.js ./__fixtures__/before.ini ./__fixtures__/after.ini
 	sleep 3s
