@@ -16,3 +16,4 @@ gendiff -h \\ type in command line for help info about usage of gendiff
 [gendiff JSON![asciicast](https://asciinema.org/a/SZGxlTECnEcbIFWYJlyNT8pxP.svg)](https://asciinema.org/a/SZGxlTECnEcbIFWYJlyNT8pxP)
 [gendiff YAML![asciicast](https://asciinema.org/a/xJLJYEWKa9OCU1tbtLLaCqnVU.svg)](https://asciinema.org/a/xJLJYEWKa9OCU1tbtLLaCqnVU)
 [gendif INI![asciicast](https://asciinema.org/a/1uLiD6l6OpcDlLCEEeGrKpVSj.svg)](https://asciinema.org/a/1uLiD6l6OpcDlLCEEeGrKpVSj)
+[gendiff whith recursive struckture & stylish format by default![asciicast](https://asciinema.org/a/hOZ4R3MfP18tkVZCHTFqAwrvV.svg)](https://asciinema.org/a/hOZ4R3MfP18tkVZCHTFqAwrvV)

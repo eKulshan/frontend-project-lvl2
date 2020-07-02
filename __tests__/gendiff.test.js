@@ -15,7 +15,7 @@ test.each([
   ['yml'],
   ['ini'],
 ])('gendiff %s output match', (extension) => {
-  expect(genDiff(getFixturePath(`before.${extension}`), getFixturePath(`after.${extension}`))).toEqual(expectedOupput);
+  expect(genDiff(getFixturePath(`before.${extension}`), getFixturePath(`after.${extension}`), 'stylish')).toEqual(expectedOupput);
 });
 
 
