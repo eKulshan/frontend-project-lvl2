@@ -8,10 +8,12 @@ test-coverage:
 	npm test -- --coverage --coverageProvider=v8
 lint:
 	npx eslint .
-gendiffS:
-	node bin/gendiff.js ./__fixtures__/before.json ./__fixtures__/after.json -f stylish
-gendiffP:
-	node bin/gendiff.js ./__fixtures__/before.json ./__fixtures__/after.json -f plain
+gendiffIniJ:
+	node bin/gendiff.js ./__fixtures__/before.ini ./__fixtures__/after.ini -f json
+gendiffJsonJ:
+	node bin/gendiff.js ./__fixtures__/before.ini ./__fixtures__/after.ini -f json
+gendiffYmlJ:
+	node bin/gendiff.js ./__fixtures__/before.yml ./__fixtures__/after.yml -f json
 asciinem:
 	cat ./__fixtures__/before.json
 	sleep 3s
