@@ -1,5 +1,4 @@
-import fs from 'fs';
-import genDiff from '../index.js';
+import genDiff from '../src/index.js';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import readFile from '../src/readFile.js';
