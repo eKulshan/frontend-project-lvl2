@@ -20,7 +20,7 @@ const getDifference = (beforeData, afterData) => {
     }
     if ((typeof beforeData[key] === 'object') && (typeof afterData[key] === 'object')) {
       return {
-        name: key, valueType: 'obj', status: 'valuesIsObject', prevValue: beforeData[key], currValue: afterData[key], children: getDifference(beforeData[key], afterData[key]),
+        name: key, status: 'valuesIsObject', prevValue: beforeData[key], currValue: afterData[key], children: getDifference(beforeData[key], afterData[key]),
       };
     }
     return {

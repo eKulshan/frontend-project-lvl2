@@ -2,11 +2,12 @@ import fs from 'fs';
 import genDiff from '../index.js';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
+import readFile from '../src/readFile.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
-const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
+console.log(__dirname);
+const getFixturePath = (filename) => path.join(__dirname, '.', '__fixtures__', filename);
 
 test.each([
   ['json', 'stylish', 'stylishExpected.txt'],
@@ -20,7 +21,7 @@ test.each([
   ['ini',  'json', 'jsonExpected.json'],
 
 ])('gendiff %s output match', (extension, format, expectedOupput) => {
-  expect(genDiff(getFixturePath(`before.${extension}`), getFixturePath(`after.${extension}`), format)).toEqual(readFile(expectedOupput));
+  expect(genDiff(getFixturePath(`before.${extension}`), getFixturePath(`after.${extension}`), format)).toEqual(readFile(getFixturePath(expectedOupput))[0]);
 });
 
 
