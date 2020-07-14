@@ -1,16 +1,17 @@
 import yaml from 'js-yaml';
 import ini from 'ini';
+import _ from 'lodash';
 
-const parseData = ([data, format]) => {
-  let parse;
-  if (format === '.json') {
-    parse = JSON.parse;
-  } else if (format === '.yml') {
-    parse = yaml.safeLoad;
-  } else if (format === '.ini') {
-    parse = ini.parse;
+const parseData = (data, formatName) => {
+  const parsers = {
+    json: JSON.parse,
+    yml: yaml.safeLoad,
+    ini: ini.parse,
+  };
+  if (_.has(parsers, formatName) === false) {
+    throw new Error(`${formatName} is unknown format!`);
   }
-  return parse(data);
+  return parsers[formatName](data);
 };
 
 export default parseData;

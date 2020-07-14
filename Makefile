@@ -9,15 +9,15 @@ test-coverage:
 lint:
 	npx eslint .
 gendiffIniJ:
-	node bin/gendiff.js ./__fixtures__/before.ini ./__fixtures__/after.ini -f json
+	node bin/gendiff.js ./__tests__/__fixtures__/file1.ini ./__tests__/__fixtures__/file2.ini -f plain
 gendiffJsonJ:
-	node bin/gendiff.js ./__fixtures__/before.ini ./__fixtures__/after.ini -f json
+	node bin/gendiff.js ./__tests__/__fixtures__/file1.ini ./__tests__/__fixtures__/file2.ini -f plain
 gendiffYmlJ:
-	node bin/gendiff.js ./__fixtures__/before.yml ./__fixtures__/after.yml -f json
+	node bin/gendiff.js ./__tests__/__fixtures__/file1.yml ./__tests__/__fixtures__/file2.yml -f plain
 asciinem:
-	cat ./__fixtures__/before.json
+	cat ./__fixtures__/file1.json
 	sleep 3s
-	cat ./__fixtures__/after.json
+	cat ./__fixtures__/file2.json
 	sleep 3s
-	node bin/gendiff.js ./__fixtures__/before.json ./__fixtures__/after.json -f plain
+	node bin/gendiff.js ./__fixtures__/file1.json ./__fixtures__/file2.json -f plain
 	sleep 3s
