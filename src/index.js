@@ -19,7 +19,7 @@ const genDiff = (file1Path, file2Path, format) => {
   file1.parsedData = parseData(file1.data, file1.formatName);
 
   const file2 = {
-    path: file1Path,
+    path: file2Path,
   };
   file2.formatName = path.extname(file2.path).slice(1);
   file2.data = readFile(file2.path);
