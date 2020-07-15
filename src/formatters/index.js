@@ -1,9 +1,8 @@
 import _ from 'lodash';
 import stylish from './stylish.js';
 import plain from './plain.js';
-import json from './json.js';
 
-const formatters = { stylish, plain, json };
+const formatters = { stylish, plain, json: JSON.stringify };
 
 const formatData = (data, format) => {
   if (!_.has(formatters, format)) {
