@@ -9,7 +9,7 @@ test-coverage:
 lint:
 	npx eslint .
 gendiffIniJ:
-	node bin/gendiff.js ./__tests__/__fixtures__/file1.ini ./__tests__/__fixtures__/file2.ini -f plain
+	node bin/gendiff.js ./__tests__/__fixtures__/file1.ini ./__tests__/__fixtures__/file2.ini -f json
 gendiffJsonJ:
 	node bin/gendiff.js ./__tests__/__fixtures__/file1.ini ./__tests__/__fixtures__/file2.ini -f plain
 gendiffYmlJ:

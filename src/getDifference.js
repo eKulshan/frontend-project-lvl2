@@ -1,30 +1,30 @@
 import _ from 'lodash';
 
-const getDifference = (beforeData, afterData) => {
-  const dataKeys = _.union(_.keys(beforeData), _.keys(afterData)).sort();
+const getDifference = (data1, data2) => {
+  const dataKeys = _.union(_.keys(data1), _.keys(data2)).sort();
   return dataKeys.map((key) => {
-    if (!_.has(afterData, key)) {
+    if (!_.has(data2, key)) {
       return {
-        name: key, status: 'removed', prevValue: beforeData[key], currValue: null, children: [],
+        name: key, status: 'removed', oldValue: data1[key],
       };
     }
-    if (!_.has(beforeData, key)) {
+    if (!_.has(data1, key)) {
       return {
-        name: key, status: 'added', prevValue: null, currValue: afterData[key], children: [],
+        name: key, status: 'added', newValue: data2[key],
       };
     }
-    if (beforeData[key] === afterData[key]) {
+    if (_.isObject(data1[key]) && _.isObject(data2[key])) {
       return {
-        name: key, status: 'unchanged', prevValue: beforeData[key], currValue: afterData[key], children: [],
+        name: key, status: 'nested', children: getDifference(data1[key], data2[key]),
       };
     }
-    if ((typeof beforeData[key] === 'object') && (typeof afterData[key] === 'object')) {
+    if (data1[key] === data2[key]) {
       return {
-        name: key, status: 'valuesIsObject', prevValue: beforeData[key], currValue: afterData[key], children: getDifference(beforeData[key], afterData[key]),
+        name: key, status: 'unchanged', oldValue: data1[key],
       };
     }
     return {
-      name: key, status: 'changed', prevValue: beforeData[key], currValue: afterData[key], children: [],
+      name: key, status: 'changed', oldValue: data1[key], newValue: data2[key],
     };
   });
 };

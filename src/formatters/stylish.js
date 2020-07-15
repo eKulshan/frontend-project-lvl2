@@ -6,21 +6,21 @@ const stylish = (diffTree) => {
   const buildOutput = (data, depth = 0) => {
     const currIntend = intend.style.repeat(intend.baseCount + depth * intend.depthMultiplicator);
     return data.reduce((acc, {
-      name, status, prevValue, currValue, children,
+      name, status, oldValue, newValue, children,
     }) => {
       switch (status) {
         case 'removed':
-          return [...acc, `${currIntend}- ${name}: ${valueConvert(prevValue, currIntend)}`];
+          return [...acc, `${currIntend}- ${name}: ${valueConvert(oldValue, currIntend)}`];
         case 'added':
-          return [...acc, `${currIntend}+ ${name}: ${valueConvert(currValue, currIntend)}`];
+          return [...acc, `${currIntend}+ ${name}: ${valueConvert(newValue, currIntend)}`];
         case 'unchanged':
-          return [...acc, `${currIntend}  ${name}: ${valueConvert(currValue, currIntend)}`];
+          return [...acc, `${currIntend}  ${name}: ${valueConvert(oldValue, currIntend)}`];
         case 'changed':
-          return [...acc, `${currIntend}+ ${name}: ${valueConvert(prevValue, currIntend)}\n${currIntend}- ${name}: ${valueConvert(currValue, currIntend)}`];
-        case 'valuesIsObject':
+          return [...acc, `${currIntend}+ ${name}: ${valueConvert(oldValue, currIntend)}\n${currIntend}- ${name}: ${valueConvert(newValue, currIntend)}`];
+        case 'nested':
           return [...acc, `${currIntend}  ${name}: {\n${buildOutput(children, depth + 1)}\n${currIntend}  }`];
         default:
-          throw new Error(`${status} is unknown stasus!`);
+          throw new Error(`${status} is unknown status!`);
       }
     }, []).join('\n');
   };
