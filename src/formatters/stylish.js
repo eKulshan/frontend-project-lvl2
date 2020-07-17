@@ -1,24 +1,40 @@
-const valueConvert = (data, intend) => ((typeof data !== 'object') ? data
-  : Object.entries(data).map(([key, value]) => `{\n${intend}    ${key}: ${value}\n${intend}  }`));
+import _ from 'lodash';
 
-const stylish = (diffTree) => {
-  const intend = { style: ' ', baseCount: 2, depthMultiplicator: 4 };
+const formatValue = (data, indent) => {
+  if (_.isObject(data)) {
+    const formatedValue = Object.entries(data).reduce((acc, [key, value]) => [...acc, `${indent}    ${key}: ${value}`], []);
+    return `{\n${formatedValue.join('\n')}\n${indent}  }`;
+  }
+  return data;
+};
+
+const indent = { style: ' ', baseCount: 2, depthMultiplicator: 4 };
+const getIndent = (depth) => {
+  const indentCount = indent.baseCount + depth * indent.depthMultiplicator;
+  return indent.style.repeat(indentCount);
+};
+
+const makeStylish = (diffTree) => {
   const buildOutput = (data, depth = 0) => {
-    const currIntend = intend.style.repeat(intend.baseCount + depth * intend.depthMultiplicator);
+    const currIndent = getIndent(depth);
     return data.reduce((acc, {
-      name, status, oldValue, newValue, children,
+      key, status, oldValue, newValue, value, children,
     }) => {
       switch (status) {
         case 'removed':
-          return [...acc, `${currIntend}- ${name}: ${valueConvert(oldValue, currIntend)}`];
+          return [...acc, `${currIndent}- ${key}: ${formatValue(oldValue, currIndent)}`];
         case 'added':
-          return [...acc, `${currIntend}+ ${name}: ${valueConvert(newValue, currIntend)}`];
+          return [...acc, `${currIndent}+ ${key}: ${formatValue(newValue, currIndent)}`];
         case 'unchanged':
-          return [...acc, `${currIntend}  ${name}: ${valueConvert(oldValue, currIntend)}`];
+          return [...acc, `${currIndent}  ${key}: ${formatValue(value, currIndent)}`];
         case 'changed':
-          return [...acc, `${currIntend}+ ${name}: ${valueConvert(oldValue, currIntend)}\n${currIntend}- ${name}: ${valueConvert(newValue, currIntend)}`];
+          return [
+            ...acc,
+            `${currIndent}+ ${key}: ${formatValue(oldValue, currIndent)}`,
+            `${currIndent}- ${key}: ${formatValue(newValue, currIndent)}`,
+          ];
         case 'nested':
-          return [...acc, `${currIntend}  ${name}: {\n${buildOutput(children, depth + 1)}\n${currIntend}  }`];
+          return [...acc, `${currIndent}  ${key}: {\n${buildOutput(children, depth + 1)}\n${currIndent}  }`];
         default:
           throw new Error(`${status} is unknown status!`);
       }
@@ -27,4 +43,4 @@ const stylish = (diffTree) => {
   return `{\n${buildOutput(diffTree)}\n}`;
 };
 
-export default stylish;
+export default makeStylish;

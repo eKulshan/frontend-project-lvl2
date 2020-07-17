@@ -27,6 +27,7 @@
     }
   - group2: {
       abc: cba
+      value: TWO
     }
   + group3: {
       fee: foo

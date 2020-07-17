@@ -15,6 +15,7 @@
     }
   },
   "group2": {
-    "abc": "cba"
+    "abc": "cba",
+    "value": "TWO"
   }
 }

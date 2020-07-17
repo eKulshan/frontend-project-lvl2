@@ -1,4 +1,4 @@
-const valueConvert = (data) => {
+const formatValue = (data) => {
   if (typeof data === 'object') {
     return '[complex value]';
   }
@@ -8,22 +8,22 @@ const valueConvert = (data) => {
   return data;
 };
 
-const plain = (diffTree) => {
+const makePlain = (diffTree) => {
   const buildOutput = (data, path) => data.reduce((acc, {
-    name, status, oldValue, newValue, children,
+    key, status, oldValue, newValue, children,
   }) => {
-    const fullName = `${path}${name}`;
+    const fullName = (path === '' ? `${path}${key}` : `${path}.${key}`);
     switch (status) {
       case 'removed':
         return [...acc, `Property '${fullName}' was removed`];
       case 'added':
-        return [...acc, `Property '${fullName}' was added with value: ${valueConvert(newValue)}`];
+        return [...acc, `Property '${fullName}' was added with value: ${formatValue(newValue)}`];
       case 'unchanged':
         return acc;
       case 'changed':
-        return [...acc, `Property '${fullName}' was updated. From ${valueConvert(oldValue)} to ${valueConvert(newValue)}`];
+        return [...acc, `Property '${fullName}' was updated. From ${formatValue(oldValue)} to ${formatValue(newValue)}`];
       case 'nested':
-        return [...acc, buildOutput(children, `${fullName}.`)];
+        return [...acc, buildOutput(children, `${fullName}`)];
       default:
         throw new Error(`${status} is unknown status!`);
     }
@@ -31,4 +31,4 @@ const plain = (diffTree) => {
   return `${buildOutput(diffTree, '')}`;
 };
 
-export default plain;
+export default makePlain;
