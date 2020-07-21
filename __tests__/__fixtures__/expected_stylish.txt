@@ -1,7 +1,7 @@
 {
     common: {
       + follow: false
-        setting1: Value 1
+        setting1: 1
       - setting2: wasd
       + setting3: true
       - setting3: {
@@ -27,7 +27,9 @@
     }
   - group2: {
       abc: cba
-      value: TWO
+      value: {
+        key: 2
+      }
     }
   + group3: {
       fee: foo

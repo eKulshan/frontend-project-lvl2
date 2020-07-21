@@ -9,4 +9,4 @@ test-coverage:
 lint:
 	npx eslint .
 gendiff:
-	node bin/gendiff.js ./__tests__/__fixtures__/file1.json ./__tests__/__fixtures__/file2.json -f stylish
+	node bin/gendiff.js ./__tests__/__fixtures__/file1.json ./__tests__/__fixtures__/file2.json -f json

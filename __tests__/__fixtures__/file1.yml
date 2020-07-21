@@ -1,6 +1,6 @@
 ---
 common:
-  setting1: Value 1
+  setting1: 1
   setting2: wasd
   setting3: true
   setting6:
@@ -12,4 +12,5 @@ group1:
     key: value
 group2:
   abc: cba
-  value: TWO
+  value: 
+    key: 2

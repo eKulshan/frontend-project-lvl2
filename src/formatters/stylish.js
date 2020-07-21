@@ -2,7 +2,12 @@ import _ from 'lodash';
 
 const formatValue = (data, indent) => {
   if (_.isObject(data)) {
-    const formatedValue = Object.entries(data).reduce((acc, [key, value]) => [...acc, `${indent}    ${key}: ${value}`], []);
+    const formatedValue = Object.entries(data).reduce((acc, [key, value]) => {
+      if (_.isObject(value)) {
+        return [...acc, `${indent}    ${key}: ${formatValue(value, `${indent}  `)}`];
+      }
+      return [...acc, `${indent}    ${key}: ${value}`];
+    }, []);
     return `{\n${formatedValue.join('\n')}\n${indent}  }`;
   }
   return data;

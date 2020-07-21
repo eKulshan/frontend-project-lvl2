@@ -12,7 +12,8 @@ const makePlain = (diffTree) => {
   const buildOutput = (data, path) => data.reduce((acc, {
     key, status, oldValue, newValue, children,
   }) => {
-    const fullName = (path === '' ? `${path}${key}` : `${path}.${key}`);
+    const currPath = [...path, key];
+    const fullName = currPath.join('.');
     switch (status) {
       case 'removed':
         return [...acc, `Property '${fullName}' was removed`];
@@ -23,12 +24,12 @@ const makePlain = (diffTree) => {
       case 'changed':
         return [...acc, `Property '${fullName}' was updated. From ${formatValue(oldValue)} to ${formatValue(newValue)}`];
       case 'nested':
-        return [...acc, buildOutput(children, `${fullName}`)];
+        return [...acc, buildOutput(children, currPath)];
       default:
         throw new Error(`${status} is unknown status!`);
     }
   }, []).join('\n');
-  return `${buildOutput(diffTree, '')}`;
+  return `${buildOutput(diffTree, [])}`;
 };
 
 export default makePlain;
