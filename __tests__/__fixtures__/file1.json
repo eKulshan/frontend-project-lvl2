@@ -17,7 +17,9 @@
   "group2": {
     "abc": "cba",
     "value": {
-      "key": 2
+      "key": {
+        "eas": 2
+      }
     }
   }
 }

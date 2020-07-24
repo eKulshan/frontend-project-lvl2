@@ -1,17 +1,18 @@
 import _ from 'lodash';
 
-const formatValue = (data, indent) => {
-  if (!_.isObject(data)) {
-    return data;
-  }
-  const formatedValue = Object.entries(data).reduce((acc, [key, value]) => [...acc, `${indent}    ${key}: ${formatValue(value, `${indent}  `)}`], []);
-  return `{\n${formatedValue.join('\n')}\n${indent}  }`;
-};
-
 const indent = { style: ' ', baseCount: 2, depthMultiplicator: 4 };
 const getIndent = (depth) => {
   const indentCount = indent.baseCount + depth * indent.depthMultiplicator;
   return indent.style.repeat(indentCount);
+};
+
+const formatValue = (data, depth) => {
+  const currIndent = getIndent(depth);
+  if (!_.isObject(data)) {
+    return data;
+  }
+  const formatedValue = Object.entries(data).reduce((acc, [key, value]) => [...acc, `${currIndent}      ${key}: ${formatValue(value, depth + 1)}`], []);
+  return `{\n${formatedValue.join('\n')}\n${currIndent}  }`;
 };
 
 const makeStylish = (diffTree) => {
@@ -22,16 +23,16 @@ const makeStylish = (diffTree) => {
     }) => {
       switch (status) {
         case 'removed':
-          return [...acc, `${currIndent}- ${key}: ${formatValue(oldValue, currIndent)}`];
+          return [...acc, `${currIndent}- ${key}: ${formatValue(oldValue, depth)}`];
         case 'added':
-          return [...acc, `${currIndent}+ ${key}: ${formatValue(newValue, currIndent)}`];
+          return [...acc, `${currIndent}+ ${key}: ${formatValue(newValue, depth)}`];
         case 'unchanged':
-          return [...acc, `${currIndent}  ${key}: ${formatValue(value, currIndent)}`];
+          return [...acc, `${currIndent}  ${key}: ${formatValue(value, depth)}`];
         case 'changed':
           return [
             ...acc,
-            `${currIndent}+ ${key}: ${formatValue(oldValue, currIndent)}`,
-            `${currIndent}- ${key}: ${formatValue(newValue, currIndent)}`,
+            `${currIndent}+ ${key}: ${formatValue(oldValue, depth)}`,
+            `${currIndent}- ${key}: ${formatValue(newValue, depth)}`,
           ];
         case 'nested':
           return [...acc, `${currIndent}  ${key}: {\n${buildOutput(children, depth + 1)}\n${currIndent}  }`];

@@ -9,10 +9,10 @@ const formatValue = (data) => {
 };
 
 const makePlain = (diffTree) => {
-  const buildOutput = (data, path) => data.reduce((acc, {
+  const buildOutput = (data, paths) => data.reduce((acc, {
     key, status, oldValue, newValue, children,
   }) => {
-    const currPath = [...path, key];
+    const currPath = [...paths, key];
     const fullName = currPath.join('.');
     switch (status) {
       case 'removed':
@@ -29,7 +29,7 @@ const makePlain = (diffTree) => {
         throw new Error(`${status} is unknown status!`);
     }
   }, []).join('\n');
-  return `${buildOutput(diffTree, [])}`;
+  return buildOutput(diffTree, []);
 };
 
 export default makePlain;
